@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import http from "node:http";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { DevtoolsLogger } from "react-native-tanstack-query-devtools-core";
 
 type StaticDashboardOptions = {
@@ -29,8 +30,11 @@ function readDashboardAsset(filePath: string) {
 }
 
 function dashboardDir() {
+  const moduleDir = path.dirname(fileURLToPath(import.meta.url));
   const entryDir = path.dirname(process.argv[1] ?? process.cwd());
   const candidates = [
+    path.resolve(moduleDir, "../../dist/frontend"),
+    path.resolve(moduleDir, "frontend"),
     path.resolve(entryDir, "frontend"),
     path.resolve(entryDir, "../dist/frontend"),
     path.resolve(process.cwd(), "dist/frontend"),
