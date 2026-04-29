@@ -24,6 +24,11 @@ function emitLocalThemeChange() {
   window.dispatchEvent(new Event("tanstack-query-devtools-themechange"));
 }
 
+function writeDevtoolsThemePreference(preference: DevtoolsThemePreference) {
+  window.localStorage.setItem(DEVTOOLS_THEME_STORAGE_KEY, preference);
+  emitLocalThemeChange();
+}
+
 function installStoragePatch() {
   patchRefCount += 1;
   if (patchRefCount > 1) {
@@ -65,9 +70,19 @@ function uninstallStoragePatch() {
   }
 }
 
+function syncDocumentTheme(resolved: ResolvedTheme) {
+  const root = document.documentElement;
+  root.setAttribute("data-theme", resolved);
+  root.classList.toggle("dark", resolved === "dark");
+}
+
 export function useTanStackDevtoolsTheme() {
   const [themePreference, setThemePreference] = useState<DevtoolsThemePreference>(() => readDevtoolsThemePreference());
   const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() => resolveDevtoolsTheme(readDevtoolsThemePreference()));
+
+  useEffect(() => {
+    syncDocumentTheme(resolvedTheme);
+  }, [resolvedTheme]);
 
   useEffect(() => {
     const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -91,5 +106,9 @@ export function useTanStackDevtoolsTheme() {
     };
   }, []);
 
-  return { resolvedTheme, themePreference };
+  return {
+    resolvedTheme,
+    themePreference,
+    setThemePreference: writeDevtoolsThemePreference,
+  };
 }

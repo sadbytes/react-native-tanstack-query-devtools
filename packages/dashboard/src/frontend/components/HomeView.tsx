@@ -1,9 +1,18 @@
 import { useState } from "react";
+import { ChevronDown, Monitor, Moon, Sun } from "lucide-react";
 import type { DashboardController } from "../hooks/useDashboardController";
 import { Badge } from "./ui/badge";
 import { AdbConnectionModal } from "./AdbConnectionModal";
 import { ConnectedAppsPanel } from "./ConnectedAppsPanel";
 import { DevicesPanel } from "./DevicesPanel";
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 type HomeViewProps = {
   dashboard: DashboardController;
@@ -12,6 +21,8 @@ type HomeViewProps = {
 export function HomeView({ dashboard }: HomeViewProps) {
   const [isConnectionModalOpen, setIsConnectionModalOpen] = useState(false);
   const adbEnabled = dashboard.config?.adbEnabled !== false;
+
+  const ThemeIcon = dashboard.resolvedTheme === "dark" ? Moon : Sun;
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 pb-8 max-[900px]:px-3.5 max-[900px]:pb-6">
@@ -31,6 +42,32 @@ export function HomeView({ dashboard }: HomeViewProps) {
           </div>
         </div>
         <div className="flex shrink-0 gap-1.5 max-[900px]:flex-wrap">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="icon-sm" variant="outline" aria-label="Change theme">
+                <ThemeIcon className="size-3.5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuRadioGroup
+                onValueChange={(value) => dashboard.setThemePreference(value as "light" | "dark" | "system")}
+                value={dashboard.themePreference}
+              >
+                <DropdownMenuRadioItem value="light">
+                  <Sun className="size-3.5" />
+                  Light
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="dark">
+                  <Moon className="size-3.5" />
+                  Dark
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="system">
+                  <Monitor className="size-3.5" />
+                  System
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Badge className="h-6 rounded-full px-2.5" variant="secondary">
             {dashboard.dashboard.devices.length} App{dashboard.dashboard.devices.length !== 1 ? "s" : ""}
           </Badge>

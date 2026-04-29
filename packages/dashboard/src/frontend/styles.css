@@ -134,7 +134,7 @@ button {
   color: var(--foreground);
 }
 
-.app-shell[data-theme="light"] {
+:root[data-theme="light"] {
   color-scheme: light;
   --bg: #f9fafb;
   --surface: #f9fafb;
@@ -153,7 +153,7 @@ button {
   --danger-bg: #fef2f2;
 }
 
-.app-shell[data-theme="dark"] {
+:root[data-theme="dark"] {
   color-scheme: dark;
   --bg: #111318;
   --surface: #191c24;

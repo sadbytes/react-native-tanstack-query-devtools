@@ -22,7 +22,7 @@ export function useDashboardController() {
   const dashboard = useBridgeDashboard(config);
   const deviceSession = useDeviceSession({ dashboard });
   const mobileTools = useMobileTools({ config });
-  const { resolvedTheme, themePreference } = useTanStackDevtoolsTheme();
+  const { resolvedTheme, themePreference, setThemePreference } = useTanStackDevtoolsTheme();
 
   useEffect(() => {
     logDashboardEvent("config.load_started");
@@ -77,6 +77,7 @@ export function useDashboardController() {
     mobileTools,
     resolvedTheme,
     themePreference,
+    setThemePreference,
     wsUrl,
     dashboardUrl,
   };

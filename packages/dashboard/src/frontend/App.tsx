@@ -5,7 +5,6 @@ import { DevtoolsWorkspace } from "./components/DevtoolsWorkspace";
 import { HomeView } from "./components/HomeView";
 import { Toaster } from "./components/ui/sonner";
 import { useDashboardController } from "./hooks/useDashboardController";
-import { cn } from "./lib/utils";
 
 export function App() {
   const dashboard = useDashboardController();
@@ -19,7 +18,7 @@ export function App() {
 
   return (
     <QueryClientProvider client={dashboard.deviceSession.queryClient}>
-      <div className={cn("app-shell", dashboard.resolvedTheme === "dark" && "dark")} data-theme={dashboard.resolvedTheme}>
+      <div className="app-shell">
         {showAdbWarning ? (
           <div className="flex items-center justify-center gap-3 bg-yellow-500/15 px-4 py-2 text-center text-sm text-yellow-700 dark:text-yellow-400">
             <span>
