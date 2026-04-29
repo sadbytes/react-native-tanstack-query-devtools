@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "jsx": "react-jsx",
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "node"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "react-native-tanstack-query-devtools-core": ["packages/core/src/index.ts"],
+      "react-native-tanstack-query-devtools-bridge": ["packages/bridge/src/index.ts"],
+      "react-native-tanstack-query-devtools-dashboard": ["packages/dashboard/src/index.tsx"]
+    }
+  }
+}

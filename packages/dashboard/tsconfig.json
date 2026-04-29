@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["ES2022", "DOM"],
+    "paths": {
+      "@/*": ["packages/dashboard/src/frontend/*"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}
