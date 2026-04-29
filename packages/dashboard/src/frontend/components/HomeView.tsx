@@ -68,15 +68,6 @@ export function HomeView({ dashboard }: HomeViewProps) {
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Badge className="h-6 rounded-full px-2.5" variant="secondary">
-            {dashboard.dashboard.devices.length} App{dashboard.dashboard.devices.length !== 1 ? "s" : ""}
-          </Badge>
-          <Badge className="h-6 rounded-full px-2.5" variant="outline">
-            {adbEnabled ? `${dashboard.mobileTools.android.devices.length} Android` : "Android Off"}
-          </Badge>
-          <Badge className="h-6 rounded-full px-2.5" variant="outline">
-            {dashboard.mobileTools.ios.devices.length} iOS
-          </Badge>
         </div>
       </header>
 
