@@ -1,6 +1,6 @@
 {
   "name": "react-native-tanstack-query-devtools-dashboard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "build": "rimraf dist && tsup src/index.tsx --format esm --dts --external vite && vite build",
     "clean": "rimraf dist .dev",
     "dev": "tsup src/dev.ts --format esm --out-dir .dev --external vite --silent && node .dev/dev.js",
+    "prepack": "pnpm run build",
     "test": "vitest run --root ../.. --config vitest.config.ts packages/dashboard/test",
     "typecheck": "tsc --noEmit"
   },

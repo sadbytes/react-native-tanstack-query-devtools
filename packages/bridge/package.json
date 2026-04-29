@@ -1,6 +1,6 @@
 {
   "name": "react-native-tanstack-query-devtools-bridge",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
   "scripts": {
     "build": "tsup src/index.ts src/production.ts --format esm,cjs --dts",
     "clean": "rimraf dist",
+    "prepack": "pnpm run build",
     "test": "vitest run --root ../.. --config vitest.config.ts packages/bridge/test",
     "typecheck": "tsc --noEmit"
   },
